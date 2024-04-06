@@ -1,0 +1,29 @@
+[package]
+name = "rustpython-ast-pyo3"
+version = "0.0.1"
+authors = ["Jeong, Yunwon"]
+rust-version = "1.72.1"
+edition = "2021"
+description = "rustpython-ast PyO3 bindings"
+repository = "https://github.com/RustPython/rustpython-ast-pyo3"
+license = "MIT"
+
+[features]
+abi3 = ["pyo3/abi3-py37"]
+# This feature is experimental
+# It reimplements AST types, but currently both slower than python AST types and limited to use in other API
+wrapper = []
+
+[lib]
+name = "rustpython_ast"
+crate-type = ["cdylib"]
+
+[dependencies]
+rustpython-ast = { version = "0.3.1", default-features = false, features = ["num-bigint", "location"] }
+rustpython-parser = { workspace = "0.3.1", default-features = false, features = ["num-bigint"] }
+
+num-complex = "0.4.0"
+num-traits = "0.2"
+once_cell = "1.18.0"
+
+pyo3 = { version = "0.20", features = ["num-bigint", "num-complex"] }
